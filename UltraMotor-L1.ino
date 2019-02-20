@@ -4,6 +4,7 @@
 #define PINSERVOIZQUIERDO 11
 Servo servoizq; //se define servo izquierdo
 Servo servoder; //se define servo derecho
+SoftwareSerial BT (3,2);// tx rx
 char orden;
 
 void setup() {
@@ -12,10 +13,16 @@ void setup() {
   servoder.attach (PINSERVODERECHO);
   servoizq.attach (PINSERVOIZQUIERDO);
   Serial.begin (9600);
+  BT.begin (9600);
 }
 
 void loop() 
 {
+  if(BT.available()>0)
+  {
+    orden = Serial.read ();
+    BT.println (orden);
+  }
   if(Serial.available() > 0)
     {
     int orden = Serial.read();
