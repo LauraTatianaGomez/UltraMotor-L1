@@ -18,30 +18,31 @@ void loop()
 {
   if(Serial.available() > 0)
     {
-    orden = Serial.read();
-    }
+    int orden = Serial.read();
+    
     switch(orden)
     {
-    case '5':
+    case '0': case 'q':
     servoder.write(90);//quieto
     servoizq.write(90);
     break;
-    case '1':
+    case '8': case 'w':
     servoder.write(0);//adelante
     servoizq.write(180);
     break;
-    case '2':
+    case '2': case 's':
     servoder.write(180);//atras
     servoizq.write(0);
     break;
-    case '3':
+    case '4': case 'a':
     servoder.write(90);////derecha
     servoizq.write(180);
     break;
-    case '4':
+    case '6': case'd':
     servoder.write(0);//izquierda
     servoizq.write(90);
     break;
     }
-  
+    Serial.println(orden);
+    }
 }
