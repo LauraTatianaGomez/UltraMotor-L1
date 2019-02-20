@@ -14,6 +14,34 @@ void setup() {
   Serial.begin (9600);
 }
 
-void loop() {
+void loop() 
+{
+  if(Serial.available() > 0)
+    {
+    orden = Serial.read();
+    }
+    switch(orden)
+    {
+    case '5':
+    servoder.write(90);//quieto
+    servoizq.write(90);
+    break;
+    case '1':
+    servoder.write(0);//adelante
+    servoizq.write(180);
+    break;
+    case '2':
+    servoder.write(180);//atras
+    servoizq.write(0);
+    break;
+    case '3':
+    servoder.write(90);////derecha
+    servoizq.write(180);
+    break;
+    case '4':
+    servoder.write(0);//izquierda
+    servoizq.write(90);
+    break;
+    }
   
 }
