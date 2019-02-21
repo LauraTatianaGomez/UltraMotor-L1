@@ -1,13 +1,14 @@
 #include <Servo.h>
 #include <SoftwareSerial.h>
-#define PINSERVODERECHO 12
-#define PINSERVOIZQUIERDO 11
+#define PINSERVODERECHO 7
+#define PINSERVOIZQUIERDO 6
 Servo servoizq; //se define servo izquierdo
 Servo servoder; //se define servo derecho
-SoftwareSerial BT (3,2);// tx rx
+SoftwareSerial BT(3,2);// rx tx 
 char orden;
 
-void setup() {
+void setup()
+{
   pinMode (PINSERVODERECHO, OUTPUT); //Configurar el modo de trabajo de un pin pudiendo ser INPUT (entrada) u OUTPUT (salida).
   pinMode (PINSERVOIZQUIERDO, OUTPUT);
   servoder.attach (PINSERVODERECHO);
@@ -18,22 +19,21 @@ void setup() {
 
 void loop() 
 {
-  if(BT.available()>0)
+  if(BT.available() > 0)
   {
-    orden = Serial.read ();
-    BT.println (orden);
+    orden = BT.read();
   }
   if(Serial.available() > 0)
     {
-    int orden = Serial.read();
-    
+    orden = Serial.read();
+    }
     switch(orden)
     {
     case '0': case 'q':
     servoder.write(90);//quieto
     servoizq.write(90);
     break;
-    case '8': case 'w':
+    case '1': case 'w':
     servoder.write(0);//adelante
     servoizq.write(180);
     break;
@@ -41,15 +41,14 @@ void loop()
     servoder.write(180);//atras
     servoizq.write(0);
     break;
-    case '4': case 'a':
+    case '3': case 'd':
     servoder.write(90);////derecha
     servoizq.write(180);
     break;
-    case '6': case'd':
+    case '4': case'a':
     servoder.write(0);//izquierda
     servoizq.write(90);
     break;
     }
-    Serial.println(orden);
+   
     }
-}
