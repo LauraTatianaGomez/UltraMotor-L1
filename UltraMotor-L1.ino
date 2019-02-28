@@ -49,6 +49,24 @@ void loop()
     servoder.write(0);//izquierda
     servoizq.write(90);
     break;
+     case '5': 
+    servoder.write(0);
+    servoizq.write(180);
+    delay(1000);
+    servoder.write(180);
+    servoizq.write(0);
+    delay(1000); 
+    servoder.write(90);//quieto
+    servoizq.write(90);
+    break;
+    case'6':
+    servoder.write(0);
+    servoizq.write(90);
+    delay(500); 
+    servoder.write(90);
+    servoizq.write(180);
+    delay(500); 
+    break;
     }
    
     }
